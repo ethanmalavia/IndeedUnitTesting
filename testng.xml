@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<!--
+    testng.xml - Integration test suite configuration
+    Runs all unit test classes together as one combined suite.
+    Execute with: mvn test
+
+    STATUS: 4 of 8 required test classes are implemented.
+    4 more classes are needed to meet the assignment requirement.
+-->
+<suite name="IndeedTestSuite" verbose="1">
+
+    <!-- ✓ COMPLETE -->
+    <test name="HomePageTests">
+        <classes>
+            <class name="org.example.HomePageTest"/>
+        </classes>
+    </test>
+
+    <!-- ✓ COMPLETE -->
+    <test name="SearchResultsTests">
+        <classes>
+            <class name="org.example.SearchResultsTest"/>
+        </classes>
+    </test>
+
+    <!-- ✓ COMPLETE -->
+    <test name="SearchFiltersTests">
+        <classes>
+            <class name="org.example.SearchFiltersTest"/>
+        </classes>
+    </test>
+
+    <!-- ✓ COMPLETE -->
+    <test name="JobListingTests">
+        <classes>
+            <class name="org.example.JobListingTest"/>
+        </classes>
+    </test>
+
+    <!-- TODO: Unit test class #5 — add class entry here -->
+
+    <!-- TODO: Unit test class #6 — add class entry here -->
+
+    <!-- TODO: Unit test class #7 — add class entry here -->
+
+    <!-- TODO: Unit test class #8 — add class entry here -->
+
+</suite>
