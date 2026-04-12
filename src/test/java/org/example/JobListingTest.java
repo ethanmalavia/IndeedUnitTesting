@@ -28,7 +28,7 @@ public class JobListingTest extends BaseTest {
      * the job description panel to become available.
      */
     private void openFirstJobListing() {
-        navigateTo(SEARCH_URL);
+
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
         wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("h2.jobTitle a")));
         driver.findElement(By.cssSelector("h2.jobTitle a")).click();
@@ -79,7 +79,7 @@ public class JobListingTest extends BaseTest {
     // Test 5: The URL is updated with a job key (vjk) after clicking a job card
     @Test
     public void testURLUpdatesWithJobKeyAfterClick() {
-        navigateTo(SEARCH_URL);
+
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
         wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("h2.jobTitle a")));
         driver.findElement(By.cssSelector("h2.jobTitle a")).click();

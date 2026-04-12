@@ -1,7 +1,9 @@
 package org.example;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.Cookie;
 import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -13,6 +15,8 @@ import java.time.Duration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+
 
 /**
  * BaseTest
@@ -28,41 +32,50 @@ import java.util.Map;
 public class BaseTest {
 
     protected ChromeDriver driver;
-
     @BeforeMethod
-    public void setUp() {
-        WebDriverManager.chromedriver().setup();
-
+    public void setUp() throws InterruptedException {
         ChromeOptions options = new ChromeOptions();
+        /*
+        1. Enter chrome://version into your chrome browser, and copy the text after "Profile Path"
+        2. Close ALL instances of chrome; task manager them. Chrome will not allow multiple instances to run under the same profile
+        3. PUT THE PROFILE PATH IN THE LINE BELOW HERE AFTER 'user-data-dir='. Change nothing else.
+        4. We will have to log in every time a test runs, but at least we got in. The 30 second stoppage is to give the time to do so.
+        */
+        options.addArguments("user-data-dir=C:\\Users\\Ronnie\\AppData\\Local\\Google\\Chrome\\User Data\\Default");
 
-        // Layer 1: remove visible automation markers
+        // Point to the specific profile folder (usually 'Default')
+        options.addArguments("profile-directory=Default");
+
+        // Standard Stealth flags
+        options.addArguments("--disable-blink-features=AutomationControlled");
         options.setExperimentalOption("excludeSwitches", List.of("enable-automation"));
         options.setExperimentalOption("useAutomationExtension", false);
-        options.addArguments("--disable-blink-features=AutomationControlled");
-        options.addArguments("--no-sandbox");
-        options.addArguments("--disable-dev-shm-usage");
-        options.addArguments("--start-maximized");
-
-        // Mimic a real Windows/Chrome user agent
-        options.addArguments(
-            "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) " +
-            "AppleWebKit/537.36 (KHTML, like Gecko) " +
-            "Chrome/134.0.0.0 Safari/537.36"
-        );
 
         driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
-        // Layer 2: CDP stealth script — runs before any page JS on every navigation
-        Map<String, Object> stealthScript = new HashMap<>();
-        stealthScript.put("source",
-            "Object.defineProperty(navigator, 'webdriver', {get: () => undefined});" +
-            "window.chrome = { runtime: {} };" +
-            "Object.defineProperty(navigator, 'languages', {get: () => ['en-US', 'en']});" +
-            "Object.defineProperty(navigator, 'plugins',   {get: () => [1, 2, 3, 4, 5]});"
-        );
-        driver.executeCdpCommand("Page.addScriptToEvaluateOnNewDocument", stealthScript);
+        // 5. Navigate directly - your login and cf_clearance should persist
+        driver.get("https://www.indeed.com");
+        Thread.sleep(30000);
     }
+    /*
+    I think I figured it out; the following requires you to open a debugging version of chrome to grab a valid cookie to get around cloudflare, and put the cookie in cfToken
+
+    ChromeOptions options = new ChromeOptions();
+        options.setExperimentalOption("debuggerAddress", "127.0.0.1:9222");
+
+        WebDriver driver = new ChromeDriver(options);
+
+        System.out.println("Connected to: " + driver.getTitle());
+
+        // Grab the cookies
+        Set<Cookie> cookies = driver.manage().getCookies();
+        for (Cookie ck : cookies) {
+            if (ck.getName().contains("cf_clearance")) {
+                System.out.println("SUCCESS! Copy this value: " + ck.getValue());
+            }
+        }
+
+    */
 
     @AfterMethod
     public void tearDown() {
@@ -88,7 +101,7 @@ public class BaseTest {
      * All test classes call this method instead of driver.get() so that
      * Cloudflare handling is consistent across the entire test suite.
      */
-    protected void navigateTo(String url) {
+   /* protected void navigateTo(String url) {
         driver.get(url);
 
         // Step 1: give Cloudflare up to 5 seconds to auto-resolve
@@ -123,5 +136,5 @@ public class BaseTest {
                 "Please solve the challenge manually when it appears in the browser window."
             );
         }
-    }
+    }*/
 }

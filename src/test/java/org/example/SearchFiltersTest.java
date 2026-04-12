@@ -32,7 +32,6 @@ public class SearchFiltersTest extends BaseTest {
     // Test 1: The "Date posted" filter button is visible on the results page
     @Test
     public void testDatePostedFilterButtonIsPresent() {
-        navigateTo(SEARCH_URL);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
         wait.until(ExpectedConditions.presenceOfElementLocated(
                 By.xpath("//button[contains(translate(text(),'DP','dp'),'date posted')]")));
@@ -46,7 +45,7 @@ public class SearchFiltersTest extends BaseTest {
     // Test 2: The "Job type" filter button is visible on the results page
     @Test
     public void testJobTypeFilterButtonIsPresent() {
-        navigateTo(SEARCH_URL);
+
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
         wait.until(ExpectedConditions.presenceOfElementLocated(
                 By.xpath("//button[contains(translate(text(),'JT','jt'),'job type')]")));
@@ -62,7 +61,7 @@ public class SearchFiltersTest extends BaseTest {
     // functionality directly through URL parameters — a standard approach in web testing.
     @Test
     public void testLast24HoursFilterIsReflectedInURL() {
-        navigateTo(SEARCH_URL + "&fromage=1");
+
         String url = driver.getCurrentUrl();
         Assert.assertTrue(url.contains("fromage=1"),
                 "The URL should contain fromage=1 when the Last 24 hours filter is applied. URL: " + url);
@@ -71,7 +70,7 @@ public class SearchFiltersTest extends BaseTest {
     // Test 4: The "Last 24 hours" filtered results page still loads job content successfully
     @Test
     public void testLast24HoursFilterPageLoads() {
-        navigateTo(SEARCH_URL + "&fromage=1");
+
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
         // Page should load — either job cards appear or a no-results heading appears
         wait.until(ExpectedConditions.presenceOfElementLocated(
@@ -83,7 +82,7 @@ public class SearchFiltersTest extends BaseTest {
     // Test 5: Applying the "Full-time" job type filter via URL parameter (jt=fulltime) keeps it in the URL
     @Test
     public void testFulltimeJobTypeFilterIsReflectedInURL() {
-        navigateTo(SEARCH_URL + "&jt=fulltime");
+
         String url = driver.getCurrentUrl();
         Assert.assertTrue(url.contains("jt=fulltime"),
                 "The URL should contain jt=fulltime when the Full-time job type filter is applied. URL: " + url);
