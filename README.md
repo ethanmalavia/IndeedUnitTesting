@@ -1,7 +1,7 @@
 # IndeedUnitTesting
 
 [![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/ethanmalavia/IndeedUnitTesting/badge)](https://securityscorecards.dev/viewer/?uri=github.com/ethanmalavia/IndeedUnitTesting)
-[![OpenSSF Best Practices](https://bestpractices.coreinfrastructure.org/projects/12507/badge)](https://bestpractices.coreinfrastructure.org/projects/12507)
+[![OpenSSF Best Practices](https://www.bestpractices.dev/projects/12508/badge)](https://www.bestpractices.dev/projects/12508)
 
 A Selenium + TestNG automated test suite that validates core functionality of [Indeed.com](https://www.indeed.com), including job search, filtering, navigation, and job management features.
 
