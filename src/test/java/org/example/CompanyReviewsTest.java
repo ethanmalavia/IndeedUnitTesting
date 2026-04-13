@@ -16,7 +16,7 @@ public class CompanyReviewsTest extends BaseTest {
         driver.get(REVIEWS_URL);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
-        // Indeed often uses 'main-content-search' or 'ifl-Input-input' for their search bars now
+
         WebElement searchInput = wait.until(ExpectedConditions.visibilityOfElementLocated(
                 By.cssSelector("input[name='q'], .ifl-Input-input, #main-content-search")
         ));

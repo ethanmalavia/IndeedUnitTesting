@@ -43,7 +43,6 @@ public class JobManagementTest extends BaseTest {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 
         // 2. Target the Interviews tab (handling case sensitivity and element type)
-        // This mirrors the 'Archived' logic by checking for presence in the sub-nav bar
         WebElement interviewsTab = wait.until(ExpectedConditions.visibilityOfElementLocated(
                 By.xpath("//a[contains(translate(text(), 'INTERVIEWS', 'interviews'), 'interviews')] | //button[contains(., 'Interviews')]")
         ));

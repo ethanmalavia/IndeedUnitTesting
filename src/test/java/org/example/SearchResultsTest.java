@@ -10,7 +10,6 @@ import java.util.List;
 
 public class SearchResultsTest extends BaseTest {
 
-    // REMOVED: private static ChromeDriver driver; <--- This was the culprit
 
     private static final String SEARCH_URL =
             "https://www.indeed.com/jobs?q=software+engineer&l=Miami%2C+FL";

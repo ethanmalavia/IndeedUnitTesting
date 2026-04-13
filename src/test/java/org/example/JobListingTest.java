@@ -25,7 +25,6 @@ public class JobListingTest extends BaseTest {
         ));
 
         // 2. Scroll to the card and click via JavaScript
-        // (Bypasses any 'Login' or 'Job Alert' overlays)
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", firstJobLink);
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", firstJobLink);
 
@@ -55,7 +54,7 @@ public class JobListingTest extends BaseTest {
         openFirstJobListing();
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-        // 2026 Locator for company name in the right-side detail pane
+        //Locator for company name in the right-side detail pane
         WebElement companyName = wait.until(ExpectedConditions.visibilityOfElementLocated(
                 By.cssSelector("[data-testid='inlineHeader-companyName'], .jobsearch-InlineCompanyRating div, [class*='companyName']")));
 
@@ -64,14 +63,14 @@ public class JobListingTest extends BaseTest {
 
     @Test
     public void testURLUpdatesWithJobKeyAfterClick() {
-        // We don't call openFirstJobListing here because we want to track the transition
+
         driver.get(SEARCH_URL);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
         WebElement firstJobLink = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("h2.jobTitle a")));
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", firstJobLink);
 
-        // Indeed adds vjk= (view job key) to the URL when a job detail is opened
+
         boolean urlChanged = wait.until(ExpectedConditions.urlContains("vjk="));
 
         Assert.assertTrue(urlChanged, "The URL should contain the 'vjk=' job key parameter. Current URL: " + driver.getCurrentUrl());
