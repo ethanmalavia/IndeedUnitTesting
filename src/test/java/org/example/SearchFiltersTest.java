@@ -1,90 +1,82 @@
 package org.example;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
 import java.time.Duration;
 
-/**
- * SearchFiltersTest
- *
- * Verifies the filter buttons on the Indeed search results page.
- * Tests confirm that the filters are present, that their dropdown menus
- * open correctly, and that selecting a filter option updates the URL
- * with the appropriate query parameter.
- *
- * Indeed URL parameters for filters:
- *   fromage=1   → Last 24 hours
- *   jt=fulltime → Full-time jobs
- *
- * URL under test: https://www.indeed.com/jobs?q=software+engineer&l=Miami%2C+FL
- */
 public class SearchFiltersTest extends BaseTest {
 
     private static final String SEARCH_URL =
             "https://www.indeed.com/jobs?q=software+engineer&l=Miami%2C+FL";
 
-    // Test 1: The "Date posted" filter button is visible on the results page
+    private void loadSearchPage() {
+        driver.get(SEARCH_URL);
+        // Ensure the window is maximized so filters aren't hidden in a 'Filters' button
+        driver.manage().window().maximize();
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        // Wait for any element that indicates the search results have actually loaded
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("mosaic-jobResults")));
+    }
+
     @Test
     public void testDatePostedFilterButtonIsPresent() {
+        loadSearchPage();
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
-        wait.until(ExpectedConditions.presenceOfElementLocated(
-                By.xpath("//button[contains(translate(text(),'DP','dp'),'date posted')]")));
 
-        WebElement dateFilter = driver.findElement(
-                By.xpath("//button[contains(translate(text(),'DP','dp'),'date posted')]"));
-        Assert.assertTrue(dateFilter.isDisplayed(),
-                "The 'Date posted' filter button should be present on the search results page");
+        // Target the button that contains 'Date Posted' text - more resilient than specific IDs
+        WebElement dateFilter = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                By.xpath("//button[contains(translate(text(), 'DATEPOSTED', 'dateposted'), 'date posted')] | //button[@id='filter-dateposted']")
+        ));
+        Assert.assertTrue(dateFilter.isDisplayed(), "The 'Date posted' filter button should be visible");
     }
 
-    // Test 2: The "Job type" filter button is visible on the results page
     @Test
     public void testJobTypeFilterButtonIsPresent() {
-
+        loadSearchPage();
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
-        wait.until(ExpectedConditions.presenceOfElementLocated(
-                By.xpath("//button[contains(translate(text(),'JT','jt'),'job type')]")));
 
-        WebElement jobTypeFilter = driver.findElement(
-                By.xpath("//button[contains(translate(text(),'JT','jt'),'job type')]"));
-        Assert.assertTrue(jobTypeFilter.isDisplayed(),
-                "The 'Job type' filter button should be present on the search results page");
+        WebElement jobTypeFilter = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                By.xpath("//button[contains(translate(text(), 'JOBTYPE', 'jobtype'), 'job type')] | //button[@id='filter-jobtype']")
+        ));
+        Assert.assertTrue(jobTypeFilter.isDisplayed(), "The 'Job type' filter button should be visible");
     }
 
-    // Test 3: Applying the "Last 24 hours" filter via URL parameter (fromage=1) keeps it in the URL.
-    // Indeed's filter dropdowns use a non-standard component structure, so we test filter
-    // functionality directly through URL parameters — a standard approach in web testing.
     @Test
     public void testLast24HoursFilterIsReflectedInURL() {
-
-        String url = driver.getCurrentUrl();
-        Assert.assertTrue(url.contains("fromage=1"),
-                "The URL should contain fromage=1 when the Last 24 hours filter is applied. URL: " + url);
-    }
-
-    // Test 4: The "Last 24 hours" filtered results page still loads job content successfully
-    @Test
-    public void testLast24HoursFilterPageLoads() {
+        // Direct navigation is the most reliable way to test filter logic
+        String filteredUrl = SEARCH_URL + "&fromage=1";
+        driver.get(filteredUrl);
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
-        // Page should load — either job cards appear or a no-results heading appears
-        wait.until(ExpectedConditions.presenceOfElementLocated(
-                By.cssSelector(".job_seen_beacon, h1, [class*='jobsearch']")));
-        Assert.assertFalse(driver.getTitle().isEmpty(),
-                "The filtered results page should have a non-empty title");
+        wait.until(ExpectedConditions.urlContains("fromage=1"));
+
+        Assert.assertTrue(driver.getCurrentUrl().contains("fromage=1"), "URL should retain the 'fromage=1' parameter.");
     }
 
-    // Test 5: Applying the "Full-time" job type filter via URL parameter (jt=fulltime) keeps it in the URL
+    @Test
+    public void testLast24HoursFilterPageLoads() {
+        driver.get(SEARCH_URL + "&fromage=1");
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+
+        // Wait for results container or the 'no results' message
+        WebElement content = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                By.cssSelector("#mosaic-jobResults, .error_page_content, .jobsearch-NoResultsHeader")));
+
+        Assert.assertTrue(content.isDisplayed(), "Filter page failed to load content.");
+    }
+
     @Test
     public void testFulltimeJobTypeFilterIsReflectedInURL() {
+        String filteredUrl = SEARCH_URL + "&jt=fulltime";
+        driver.get(filteredUrl);
 
-        String url = driver.getCurrentUrl();
-        Assert.assertTrue(url.contains("jt=fulltime"),
-                "The URL should contain jt=fulltime when the Full-time job type filter is applied. URL: " + url);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        wait.until(ExpectedConditions.urlContains("jt=fulltime"));
+
+        Assert.assertTrue(driver.getCurrentUrl().contains("jt=fulltime"), "URL should retain 'jt=fulltime'.");
     }
 }

@@ -55,7 +55,7 @@ public class BaseTest {
 
         // 5. Navigate directly - your login and cf_clearance should persist
         driver.get("https://www.indeed.com");
-        Thread.sleep(30000);
+        Thread.sleep(5000);
     }
     /*
     I think I figured it out; the following requires you to open a debugging version of chrome to grab a valid cookie to get around cloudflare, and put the cookie in cfToken
