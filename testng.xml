@@ -6,8 +6,7 @@
     Runs all unit test classes together as one combined suite.
     Execute with: mvn test
 
-    STATUS: 4 of 8 required test classes are implemented.
-    4 more classes are needed to meet the assignment requirement.
+    STATUS: 9 of 9 test classes implemented.
 -->
 <suite name="IndeedTestSuite" verbose="1">
 
@@ -39,12 +38,39 @@
         </classes>
     </test>
 
-    <!-- TODO: Unit test class #5 — add class entry here -->
+    <!-- ✓ COMPLETE -->
+    <test name="JobSearchEndToEndTests">
+        <classes>
+            <class name="org.example.JobSearchEndToEndTest"/>
+        </classes>
+    </test>
 
-    <!-- TODO: Unit test class #6 — add class entry here -->
+    <!-- ✓ COMPLETE -->
+    <test name="JobApplicationFlowTests">
+        <classes>
+            <class name="org.example.JobApplicationFlowTest"/>
+        </classes>
+    </test>
 
-    <!-- TODO: Unit test class #7 — add class entry here -->
+    <!-- ✓ COMPLETE -->
+    <test name="SalariesPageTests">
+        <classes>
+            <class name="org.example.SalariesPageTest"/>
+        </classes>
+    </test>
 
-    <!-- TODO: Unit test class #8 — add class entry here -->
+    <!-- ✓ COMPLETE -->
+    <test name="CompanyReviewsTests">
+        <classes>
+            <class name="org.example.CompanyReviewsTest"/>
+        </classes>
+    </test>
+
+    <!-- ✓ COMPLETE -->
+    <test name="JobManagementTests">
+        <classes>
+            <class name="org.example.JobManagementTest"/>
+        </classes>
+    </test>
 
 </suite>

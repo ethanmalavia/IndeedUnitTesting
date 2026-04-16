@@ -10,6 +10,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
+import org.openqa.selenium.TimeoutException;
 
 import java.time.Duration;
 import java.util.HashMap;
@@ -17,7 +19,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-
+@Listeners(FailureListener.class)
 /**
  * BaseTest
  *
@@ -41,7 +43,7 @@ public class BaseTest {
         3. PUT THE PROFILE PATH IN THE LINE BELOW HERE AFTER 'user-data-dir='. Change nothing else.
         4. We will have to log in every time a test runs, but at least we got in. The 30 second stoppage is to give the time to do so.
         */
-        options.addArguments("user-data-dir=C:\\Users\\Ronnie\\AppData\\Local\\Google\\Chrome\\User Data\\Default");
+        options.addArguments("user-data-dir=C:\\Users\\Ethan Malavia\\AppData\\Local\\Google\\Chrome\\User Data\\Default");
 
         // Point to the specific profile folder (usually 'Default')
         options.addArguments("profile-directory=Default");
@@ -52,10 +54,21 @@ public class BaseTest {
         options.setExperimentalOption("useAutomationExtension", false);
 
         driver = new ChromeDriver(options);
+        driver.manage().window().maximize();
 
         // 5. Navigate directly - your login and cf_clearance should persist
         driver.get("https://www.indeed.com");
         Thread.sleep(5000);
+
+        // Wait up to 30 seconds for Cloudflare to clear before any test starts
+        try {
+            new WebDriverWait(driver, Duration.ofSeconds(30))
+                .until(d -> !d.getTitle().contains("Just a moment")
+                          && !d.getTitle().contains("Attention Required")
+                          && !d.getTitle().contains("Please Wait"));
+        } catch (TimeoutException ignored) {
+            // Proceed anyway — the individual test will fail with a clear message
+        }
     }
     /*
     I think I figured it out; the following requires you to open a debugging version of chrome to grab a valid cookie to get around cloudflare, and put the cookie in cfToken
