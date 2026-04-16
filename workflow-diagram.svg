@@ -1,0 +1,174 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 1120" font-family="Segoe UI, Arial, sans-serif">
+
+  <!-- Background -->
+  <rect width="980" height="1120" fill="#0f1117"/>
+
+  <!-- ===== TITLE ===== -->
+  <text x="490" y="44" text-anchor="middle" fill="#ffffff" font-size="22" font-weight="700" letter-spacing="1">IndeedUnitTesting — Automation Workflow</text>
+  <text x="490" y="66" text-anchor="middle" fill="#8b8fa8" font-size="13">Selenium WebDriver + TestNG | CEN 4072 — Florida International University</text>
+
+  <!-- ===== TOP LAYER: Orchestration ===== -->
+  <!-- TestNG box -->
+  <rect x="60" y="90" width="200" height="72" rx="10" fill="#1e2235" stroke="#4f6ef7" stroke-width="2"/>
+  <text x="160" y="118" text-anchor="middle" fill="#4f6ef7" font-size="11" font-weight="700" letter-spacing="1">ORCHESTRATION</text>
+  <text x="160" y="137" text-anchor="middle" fill="#ffffff" font-size="15" font-weight="700">TestNG</text>
+  <text x="160" y="153" text-anchor="middle" fill="#8b8fa8" font-size="11">testng.xml suite runner</text>
+
+  <!-- BaseTest box -->
+  <rect x="390" y="90" width="200" height="72" rx="10" fill="#1e2235" stroke="#f7a14f" stroke-width="2"/>
+  <text x="490" y="118" text-anchor="middle" fill="#f7a14f" font-size="11" font-weight="700" letter-spacing="1">SHARED SETUP</text>
+  <text x="490" y="137" text-anchor="middle" fill="#ffffff" font-size="15" font-weight="700">BaseTest</text>
+  <text x="490" y="153" text-anchor="middle" fill="#8b8fa8" font-size="11">@BeforeMethod / @AfterMethod</text>
+
+  <!-- ChromeDriver / WebDriverManager box -->
+  <rect x="720" y="90" width="200" height="72" rx="10" fill="#1e2235" stroke="#4fccf7" stroke-width="2"/>
+  <text x="820" y="118" text-anchor="middle" fill="#4fccf7" font-size="11" font-weight="700" letter-spacing="1">BROWSER DRIVER</text>
+  <text x="820" y="137" text-anchor="middle" fill="#ffffff" font-size="15" font-weight="700">ChromeDriver</text>
+  <text x="820" y="153" text-anchor="middle" fill="#8b8fa8" font-size="11">WebDriverManager auto-setup</text>
+
+  <!-- Arrows between top boxes -->
+  <line x1="260" y1="126" x2="390" y2="126" stroke="#4f6ef7" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <polygon points="388,121 398,126 388,131" fill="#4f6ef7"/>
+  <line x1="590" y1="126" x2="720" y2="126" stroke="#f7a14f" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <polygon points="718,121 728,126 718,131" fill="#f7a14f"/>
+
+  <!-- ===== WORKFLOW COLUMN (center) ===== -->
+  <!-- Vertical spine -->
+  <line x1="490" y1="200" x2="490" y2="960" stroke="#2a2f45" stroke-width="2" stroke-dasharray="6,4"/>
+
+  <!-- Step 1: Launch Browser -->
+  <rect x="340" y="200" width="300" height="80" rx="12" fill="#1a2744" stroke="#4f6ef7" stroke-width="2.5"/>
+  <circle cx="375" cy="240" r="16" fill="#4f6ef7"/>
+  <text x="375" y="245" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">1</text>
+  <text x="460" y="232" text-anchor="middle" fill="#ffffff" font-size="14" font-weight="700">Launch Browser</text>
+  <text x="460" y="252" text-anchor="middle" fill="#8b8fa8" font-size="11">ChromeDriver + real user profile</text>
+  <text x="460" y="268" text-anchor="middle" fill="#8b8fa8" font-size="11">Stealth flags to avoid bot detection</text>
+
+  <!-- Arrow -->
+  <line x1="490" y1="280" x2="490" y2="308" stroke="#4f6ef7" stroke-width="2"/>
+  <polygon points="484,306 490,318 496,306" fill="#4f6ef7"/>
+
+  <!-- Step 2: Navigate to Indeed -->
+  <rect x="340" y="318" width="300" height="80" rx="12" fill="#1a2744" stroke="#4f6ef7" stroke-width="2.5"/>
+  <circle cx="375" cy="358" r="16" fill="#4f6ef7"/>
+  <text x="375" y="363" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">2</text>
+  <text x="460" y="350" text-anchor="middle" fill="#ffffff" font-size="14" font-weight="700">Navigate to Indeed</text>
+  <text x="460" y="370" text-anchor="middle" fill="#8b8fa8" font-size="11">driver.get("https://www.indeed.com")</text>
+  <text x="460" y="386" text-anchor="middle" fill="#8b8fa8" font-size="11">5 s wait for Cloudflare clearance</text>
+
+  <!-- Arrow -->
+  <line x1="490" y1="398" x2="490" y2="426" stroke="#4f6ef7" stroke-width="2"/>
+  <polygon points="484,424 490,436 496,424" fill="#4f6ef7"/>
+
+  <!-- Step 3: Perform Actions (wider, with action tiles) -->
+  <rect x="100" y="436" width="780" height="330" rx="14" fill="#141824" stroke="#f7a14f" stroke-width="2"/>
+  <rect x="100" y="436" width="780" height="36" rx="14" fill="#f7a14f"/>
+  <rect x="100" y="454" width="780" height="18" fill="#f7a14f"/>
+  <circle cx="140" cy="454" r="16" fill="#c47c2a"/>
+  <text x="140" y="459" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">3</text>
+  <text x="490" y="459" text-anchor="middle" fill="#1a1a1a" font-size="14" font-weight="700">Perform Actions (Simulated User Interactions)</text>
+
+  <!-- 6 action tiles -->
+  <!-- Tile: Search -->
+  <rect x="120" y="486" width="220" height="100" rx="10" fill="#1e2235" stroke="#4f6ef7" stroke-width="1.5"/>
+  <text x="230" y="510" text-anchor="middle" fill="#4f6ef7" font-size="11" font-weight="700">SEARCH</text>
+  <text x="230" y="530" text-anchor="middle" fill="#ffffff" font-size="12">Type job title + location</text>
+  <text x="230" y="548" text-anchor="middle" fill="#8b8fa8" font-size="11">sendKeys() on</text>
+  <text x="230" y="563" text-anchor="middle" fill="#8b8fa8" font-size="11">#text-input-what/where</text>
+  <text x="230" y="578" text-anchor="middle" fill="#8b8fa8" font-size="11">click submit button</text>
+
+  <!-- Tile: Filter -->
+  <rect x="380" y="486" width="220" height="100" rx="10" fill="#1e2235" stroke="#f7a14f" stroke-width="1.5"/>
+  <text x="490" y="510" text-anchor="middle" fill="#f7a14f" font-size="11" font-weight="700">FILTER</text>
+  <text x="490" y="530" text-anchor="middle" fill="#ffffff" font-size="12">Apply search filters</text>
+  <text x="490" y="548" text-anchor="middle" fill="#8b8fa8" font-size="11">Date Posted (fromage=1)</text>
+  <text x="490" y="563" text-anchor="middle" fill="#8b8fa8" font-size="11">Job Type (jt=fulltime)</text>
+  <text x="490" y="578" text-anchor="middle" fill="#8b8fa8" font-size="11">URL param injection</text>
+
+  <!-- Tile: Click -->
+  <rect x="640" y="486" width="220" height="100" rx="10" fill="#1e2235" stroke="#4fccf7" stroke-width="1.5"/>
+  <text x="750" y="510" text-anchor="middle" fill="#4fccf7" font-size="11" font-weight="700">CLICK</text>
+  <text x="750" y="530" text-anchor="middle" fill="#ffffff" font-size="12">Click job cards / tabs</text>
+  <text x="750" y="548" text-anchor="middle" fill="#8b8fa8" font-size="11">JS click for stability</text>
+  <text x="750" y="563" text-anchor="middle" fill="#8b8fa8" font-size="11">scrollIntoView first</text>
+  <text x="750" y="578" text-anchor="middle" fill="#8b8fa8" font-size="11">h2.jobTitle a / nav links</text>
+
+  <!-- Tile: Navigate -->
+  <rect x="120" y="602" width="220" height="100" rx="10" fill="#1e2235" stroke="#a14ff7" stroke-width="1.5"/>
+  <text x="230" y="626" text-anchor="middle" fill="#a14ff7" font-size="11" font-weight="700">NAVIGATE</text>
+  <text x="230" y="646" text-anchor="middle" fill="#ffffff" font-size="12">Tab &amp; page traversal</text>
+  <text x="230" y="664" text-anchor="middle" fill="#8b8fa8" font-size="11">/companies, /salaries</text>
+  <text x="230" y="679" text-anchor="middle" fill="#8b8fa8" font-size="11">/myjobs, /jobs?q=...</text>
+  <text x="230" y="694" text-anchor="middle" fill="#8b8fa8" font-size="11">linkText / cssSelector</text>
+
+  <!-- Tile: Wait -->
+  <rect x="380" y="602" width="220" height="100" rx="10" fill="#1e2235" stroke="#f74f6e" stroke-width="1.5"/>
+  <text x="490" y="626" text-anchor="middle" fill="#f74f6e" font-size="11" font-weight="700">WAIT</text>
+  <text x="490" y="646" text-anchor="middle" fill="#ffffff" font-size="12">Explicit waits (dynamic UI)</text>
+  <text x="490" y="664" text-anchor="middle" fill="#8b8fa8" font-size="11">WebDriverWait up to 20s</text>
+  <text x="490" y="679" text-anchor="middle" fill="#8b8fa8" font-size="11">ExpectedConditions</text>
+  <text x="490" y="694" text-anchor="middle" fill="#8b8fa8" font-size="11">visibilityOf / urlContains</text>
+
+  <!-- Tile: Scroll -->
+  <rect x="640" y="602" width="220" height="100" rx="10" fill="#1e2235" stroke="#4ff7a1" stroke-width="1.5"/>
+  <text x="750" y="626" text-anchor="middle" fill="#4ff7a1" font-size="11" font-weight="700">SCROLL</text>
+  <text x="750" y="646" text-anchor="middle" fill="#ffffff" font-size="12">Trigger lazy-loaded content</text>
+  <text x="750" y="664" text-anchor="middle" fill="#8b8fa8" font-size="11">window.scrollBy(0,600)</text>
+  <text x="750" y="679" text-anchor="middle" fill="#8b8fa8" font-size="11">scrollIntoView(true)</text>
+  <text x="750" y="694" text-anchor="middle" fill="#8b8fa8" font-size="11">JavascriptExecutor</text>
+
+  <!-- Arrow out of step 3 -->
+  <line x1="490" y1="766" x2="490" y2="794" stroke="#f7a14f" stroke-width="2"/>
+  <polygon points="484,792 490,804 496,792" fill="#f7a14f"/>
+
+  <!-- Step 4: Validate -->
+  <rect x="100" y="804" width="780" height="86" rx="12" fill="#142414" stroke="#4ff7a1" stroke-width="2.5"/>
+  <circle cx="140" cy="847" r="16" fill="#2a7a4f"/>
+  <text x="140" y="852" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">4</text>
+  <text x="490" y="832" text-anchor="middle" fill="#ffffff" font-size="14" font-weight="700">Validate Expected Results</text>
+  <text x="270" y="856" text-anchor="middle" fill="#4ff7a1" font-size="11">Assert.assertTrue()</text>
+  <text x="490" y="856" text-anchor="middle" fill="#4ff7a1" font-size="11">Assert.assertFalse()</text>
+  <text x="710" y="856" text-anchor="middle" fill="#4ff7a1" font-size="11">Assert.assertNotNull()</text>
+  <text x="270" y="876" text-anchor="middle" fill="#8b8fa8" font-size="11">element visible / enabled</text>
+  <text x="490" y="876" text-anchor="middle" fill="#8b8fa8" font-size="11">text not empty / URL contains</text>
+  <text x="710" y="876" text-anchor="middle" fill="#8b8fa8" font-size="11">count > 0 / panel displayed</text>
+
+  <!-- Arrow -->
+  <line x1="490" y1="890" x2="490" y2="918" stroke="#4ff7a1" stroke-width="2"/>
+  <polygon points="484,916 490,928 496,916" fill="#4ff7a1"/>
+
+  <!-- Step 5: Close Browser -->
+  <rect x="340" y="928" width="300" height="68" rx="12" fill="#241414" stroke="#f74f6e" stroke-width="2.5"/>
+  <circle cx="375" cy="962" r="16" fill="#7a2a2a"/>
+  <text x="375" y="967" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">5</text>
+  <text x="460" y="954" text-anchor="middle" fill="#ffffff" font-size="14" font-weight="700">Close Browser</text>
+  <text x="460" y="974" text-anchor="middle" fill="#8b8fa8" font-size="11">driver.quit() — @AfterMethod</text>
+  <text x="460" y="988" text-anchor="middle" fill="#8b8fa8" font-size="11">Runs after every test method</text>
+
+  <!-- ===== TEST CLASSES LEGEND ===== -->
+  <rect x="60" y="1022" width="860" height="82" rx="10" fill="#14181f" stroke="#2a2f45" stroke-width="1.5"/>
+  <text x="490" y="1044" text-anchor="middle" fill="#8b8fa8" font-size="11" font-weight="700" letter-spacing="1">TEST CLASSES (43 TESTS ACROSS 9 SUITES)</text>
+
+  <!-- Row 1 -->
+  <rect x="78" y="1053" width="10" height="10" rx="2" fill="#4f6ef7"/>
+  <text x="94" y="1063" fill="#cccccc" font-size="11">HomePageTest (5)</text>
+  <rect x="220" y="1053" width="10" height="10" rx="2" fill="#f7a14f"/>
+  <text x="236" y="1063" fill="#cccccc" font-size="11">SearchResultsTest (5)</text>
+  <rect x="380" y="1053" width="10" height="10" rx="2" fill="#a14ff7"/>
+  <text x="396" y="1063" fill="#cccccc" font-size="11">SearchFiltersTest (5)</text>
+  <rect x="536" y="1053" width="10" height="10" rx="2" fill="#4fccf7"/>
+  <text x="552" y="1063" fill="#cccccc" font-size="11">JobListingTest (4)</text>
+  <rect x="682" y="1053" width="10" height="10" rx="2" fill="#f74f6e"/>
+  <text x="698" y="1063" fill="#cccccc" font-size="11">JobManagementTest (5)</text>
+
+  <!-- Row 2 -->
+  <rect x="78" y="1074" width="10" height="10" rx="2" fill="#4ff7a1"/>
+  <text x="94" y="1084" fill="#cccccc" font-size="11">NavigationTabsTest (4)</text>
+  <rect x="244" y="1074" width="10" height="10" rx="2" fill="#f7e44f"/>
+  <text x="260" y="1084" fill="#cccccc" font-size="11">JobSearchEndToEndTest (5)</text>
+  <rect x="442" y="1074" width="10" height="10" rx="2" fill="#f7a14f"/>
+  <text x="458" y="1084" fill="#cccccc" font-size="11">CompanyReviewsTest (5)</text>
+  <rect x="614" y="1074" width="10" height="10" rx="2" fill="#4f6ef7"/>
+  <text x="630" y="1084" fill="#cccccc" font-size="11">SalariesPageTest (5)</text>
+
+</svg>
